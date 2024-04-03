@@ -4,10 +4,7 @@ import com.sun.tools.jconsole.JConsoleContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sit.int204.springpractice.entities.Employee;
 import sit.int204.springpractice.services.EmployeeService;
 
@@ -35,5 +32,14 @@ public class EmployeeController {
         }
     }
 
+    @GetMapping("/{empId}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable(value = "empId") int id) {
+        return ResponseEntity.ok(service.getEmployeeById(id));
+    }
+
+    @PostMapping("")
+    public ResponseEntity<Employee> addNewEmployee(@RequestBody Employee employee) {
+        return null;
+    }
 
 }

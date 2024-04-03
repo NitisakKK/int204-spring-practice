@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import sit.int204.springpractice.entities.Employee;
+import sit.int204.springpractice.exceptions.ItemNotFoundException;
 import sit.int204.springpractice.repositories.EmployeeRepository;
 
 import java.util.ArrayList;
@@ -34,5 +35,9 @@ public class EmployeeService {
 
     public List<Employee> getAllEmployees() {
         return repository.findAll();
+    }
+
+    public Employee getEmployeeById(int id) {
+        return repository.findById(id).orElseThrow(() -> new ItemNotFoundException("Can not find id " + id));
     }
 }
