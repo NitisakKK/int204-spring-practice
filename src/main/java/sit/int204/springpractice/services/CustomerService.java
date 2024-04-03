@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sit.int204.springpractice.dto.CustomerDto;
 import sit.int204.springpractice.entities.Customer;
+import sit.int204.springpractice.exceptions.ItemNotFoundException;
 import sit.int204.springpractice.repositories.CustomerRepository;
 import sit.int204.springpractice.utils.ListMapper;
 
@@ -20,7 +21,7 @@ public class CustomerService {
         return listMapper.mapList(repository.findAll(), CustomerDto.class);
     }
 
-//    public List<Customer> getAllCustomer() {
-//        return repository.findAll();
-//    }
+    public Customer getCustomerDtoById(int id) {
+        return repository.findById(id).orElseThrow(() -> new ItemNotFoundException(" Customer number is not found"));
+    }
 }
