@@ -1,8 +1,7 @@
 package sit.int204.springpractice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,37 +14,28 @@ public class Employee {
     @Column(name = "employeeNumber", nullable = false)
     private Integer id;
 
-    @Size(max = 50)
-    @NotNull
     @Column(name = "lastName", nullable = false, length = 50)
     private String lastName;
 
-    @Size(max = 50)
-    @NotNull
     @Column(name = "firstName", nullable = false, length = 50)
     private String firstName;
 
-    @Size(max = 10)
-    @NotNull
     @Column(name = "extension", nullable = false, length = 10)
     private String extension;
 
-    @Size(max = 100)
-    @NotNull
     @Column(name = "email", nullable = false, length = 100)
     private String email;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "officeCode", nullable = false)
-    private Office officeCode;
+    private Office office;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "reportsTo")
     private Employee reportsTo;
 
-    @Size(max = 50)
-    @NotNull
     @Column(name = "jobTitle", nullable = false, length = 50)
     private String jobTitle;
 
