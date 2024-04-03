@@ -55,8 +55,7 @@ public class EmployeeService {
     public EmployeeDto getEmployeeByIdDto(int id) {
         Employee emp =  repository.findById(id).orElseThrow(() -> new ItemNotFoundException("Can not find id " + id));
         System.out.println("Convert DTO");
-        EmployeeDto employeeDto = modelMapper.map(emp, EmployeeDto.class);
-        return employeeDto;
+        return modelMapper.map(emp, EmployeeDto.class);
 
     }
 
@@ -81,5 +80,11 @@ public class EmployeeService {
         employeeMap.setOffice(officeService.getOfficeById(updateEmployeeDto.getOfficeId()));
         employeeMap.setReportsTo(this.getEmployeeById(updateEmployeeDto.getReportsTo()));
         return employeeMap;
+    }
+
+    @Transactional
+    public void deleteEmployee(int id) {
+        Employee employee = this.getEmployeeById(id);
+        repository.delete(employee);
     }
 }

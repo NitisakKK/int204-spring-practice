@@ -1,6 +1,5 @@
 package sit.int204.springpractice.controllers;
 
-import com.sun.tools.jconsole.JConsoleContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +37,7 @@ public class EmployeeController {
     public ResponseEntity<Employee> getEmployeeById(@PathVariable(value = "empId") int id) {
         return ResponseEntity.ok(service.getEmployeeById(id));
     }
+
     @GetMapping("/dto/{empId}")
     public ResponseEntity<EmployeeDto> getEmployeeByIdDto(@PathVariable(value = "empId") int id) {
         return ResponseEntity.ok(service.getEmployeeByIdDto(id));
@@ -52,4 +52,10 @@ public class EmployeeController {
     public ResponseEntity<Employee> updateNewEmployee(@RequestBody NewEmployeeDto newEmployeeDto) {
         return ResponseEntity.ok().body(service.updateEmployee(newEmployeeDto));
     }
+
+    @DeleteMapping("/{empId}")
+    public void deleteEmployee(@PathVariable(value = "empId") int id) {
+        service.deleteEmployee(id);
+    }
+
 }
