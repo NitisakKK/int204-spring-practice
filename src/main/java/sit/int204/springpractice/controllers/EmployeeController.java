@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sit.int204.springpractice.dto.EmployeeDto;
+import sit.int204.springpractice.dto.NewEmployeeDto;
 import sit.int204.springpractice.entities.Employee;
 import sit.int204.springpractice.services.EmployeeService;
 
@@ -36,10 +38,14 @@ public class EmployeeController {
     public ResponseEntity<Employee> getEmployeeById(@PathVariable(value = "empId") int id) {
         return ResponseEntity.ok(service.getEmployeeById(id));
     }
+    @GetMapping("/dto/{empId}")
+    public ResponseEntity<EmployeeDto> getEmployeeByIdDto(@PathVariable(value = "empId") int id) {
+        return ResponseEntity.ok(service.getEmployeeByIdDto(id));
+    }
 
     @PostMapping("")
-    public ResponseEntity<Employee> addNewEmployee(@RequestBody Employee employee) {
-        return null;
+    public ResponseEntity<EmployeeDto> addNewEmployee(@RequestBody NewEmployeeDto newEmployeeDto) {
+        return ResponseEntity.ok().body(service.addNewEmployeeDto(newEmployeeDto));
     }
 
 }

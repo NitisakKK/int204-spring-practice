@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
+import sit.int204.springpractice.controllers.EmployeeController;
 import sit.int204.springpractice.models.ErrorResponse;
+import sit.int204.springpractice.repositories.EmployeeRepository;
 
-@ControllerAdvice("sit/int204/springpractice/controllers")
+@ControllerAdvice(assignableTypes = {EmployeeController.class})
 public class GlobalExceptionHandler {
 
     public ResponseEntity<ErrorResponse> buildErrorResponse(String title, int statusCode, String message, String instance){
