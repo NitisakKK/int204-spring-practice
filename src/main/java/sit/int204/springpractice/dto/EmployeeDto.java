@@ -8,13 +8,8 @@ import lombok.Setter;
 @Setter
 public class EmployeeDto {
     private Integer id;
-    @JsonIgnore
     private String firstName;
-    @JsonIgnore
     private String lastName;
     private String email;
     private OfficeDto office;
-    public String getName() {
-        return firstName + ' '+ lastName;
-    }
 }

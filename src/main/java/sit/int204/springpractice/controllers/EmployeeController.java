@@ -48,4 +48,8 @@ public class EmployeeController {
         return ResponseEntity.ok().body(service.addNewEmployeeDto(newEmployeeDto));
     }
 
+    @PutMapping("")
+    public ResponseEntity<Employee> updateNewEmployee(@RequestBody NewEmployeeDto newEmployeeDto) {
+        return ResponseEntity.ok().body(service.updateEmployee(newEmployeeDto));
+    }
 }

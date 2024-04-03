@@ -71,4 +71,15 @@ public class EmployeeService {
 
         return modelMapper.map(repository.saveAndFlush(employeeMap), EmployeeDto.class);
     }
+
+    @Transactional
+    public Employee updateEmployee(NewEmployeeDto updateEmployeeDto) {
+        if (updateEmployeeDto==null) throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, " new Employee is null");
+        if (!repository.existsById(updateEmployeeDto.getId())) throw new ItemNotFoundException(" can not found employee id " + updateEmployeeDto.getId());
+
+        Employee employeeMap = modelMapper.map(updateEmployeeDto, Employee.class);
+        employeeMap.setOffice(officeService.getOfficeById(updateEmployeeDto.getOfficeId()));
+        employeeMap.setReportsTo(this.getEmployeeById(updateEmployeeDto.getReportsTo()));
+        return employeeMap;
+    }
 }
